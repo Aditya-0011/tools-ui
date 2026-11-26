@@ -1,0 +1,54 @@
+import { defineConfig } from "vite";
+import react, { reactCompilerPreset } from "@vitejs/plugin-react";
+import babel from "@rolldown/plugin-babel";
+import tailwindcss from "@tailwindcss/vite";
+import path from "node:path";
+
+export default defineConfig(({ command }) => {
+  const isDev = command === "serve";
+  return {
+    plugins: [
+      tailwindcss(),
+      react(),
+      babel({ presets: [reactCompilerPreset()] }),
+    ],
+    resolve: {
+      alias: {
+        "@": path.resolve(import.meta.dirname, "./src"),
+      },
+    },
+    build: {
+      rolldownOptions: {
+        output: {
+          codeSplitting: {
+            groups: [
+              {
+                name: "react-router",
+                test: /node_modules\/react-router\//,
+              },
+              {
+                name: "react-query",
+                test: /node_modules\/@tanstack\/(query-core|react-query)\//,
+              },
+              {
+                name: "lucide-react",
+                test: /node_modules\/lucide-react\//,
+              },
+              {
+                name: "luxon",
+                test: /node_modules\/luxon\//,
+              },
+              {
+                name: "zod",
+                test: /node_modules\/zod\//,
+              },
+            ],
+          },
+        },
+      },
+    },
+    server: {
+      port: isDev ? 5174 : 5173,
+    },
+  };
+});

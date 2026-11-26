@@ -1,0 +1,19 @@
+* text=auto eol=lf
+
+*.ts text
+*.tsx text
+*.css text
+*.html text
+*.json text
+*.md text
+
+bun.lock linguist-generated=true -diff
+
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.gif binary
+*.webp binary
+*.ico binary
+*.woff binary
+*.woff2 binary

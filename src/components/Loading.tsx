@@ -1,0 +1,39 @@
+import { Loader2, Cpu } from "lucide-react";
+
+export function Loading({ content }: { content?: string } = {}) {
+  const isBuilding = !content;
+
+  return (
+    <div
+      role="status"
+      aria-live="polite"
+      className="mx-auto flex h-full max-w-lg flex-col items-center justify-center gap-6 p-6 md:p-10"
+    >
+      <div
+        className={`flex h-20 w-20 items-center justify-center rounded-full shadow-[0_0_30px_-10px] ring-1 ${
+          isBuilding
+            ? "bg-white/5 shadow-white/10 ring-white/15"
+            : "bg-violet-500/10 shadow-violet-500/20 ring-violet-500/20"
+        }`}
+        aria-hidden="true"
+      >
+        {isBuilding ? (
+          <Cpu className="h-10 w-10 animate-pulse text-neutral-300 motion-reduce:animate-none" />
+        ) : (
+          <Loader2 className="h-10 w-10 animate-spin text-violet-500 motion-reduce:animate-none" />
+        )}
+      </div>
+
+      <div className="space-y-2 text-center">
+        <h3 className="text-xl font-semibold text-white">
+          {content ? `Loading ${content}...` : "Building page..."}
+        </h3>
+        <p className="text-muted-foreground text-sm">
+          {content
+            ? "Fetching latest information from the server."
+            : "Upgrade your machine for a faster build time."}
+        </p>
+      </div>
+    </div>
+  );
+}
