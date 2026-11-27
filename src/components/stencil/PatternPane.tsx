@@ -141,10 +141,10 @@ export function PatternPane({
         autoCapitalize="off"
         autoComplete="off"
         autoCorrect="off"
-        wrap="off"
+        wrap="soft"
         placeholder="Type a pattern, e.g. $0 or ${name|upper}…"
         onChange={(event) => onPatternChange(event.target.value)}
-        className={editorClass}
+        className={cn(editorClass, "wrap-anywhere")}
       />
 
       <div id={`${ids}-issue`} aria-live="polite">

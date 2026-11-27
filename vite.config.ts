@@ -23,6 +23,10 @@ export default defineConfig(({ command }) => {
           codeSplitting: {
             groups: [
               {
+                name: "react",
+                test: /node_modules\/(react|react-dom|scheduler)\//,
+              },
+              {
                 name: "react-router",
                 test: /node_modules\/react-router\//,
               },
